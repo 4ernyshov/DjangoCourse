@@ -1,16 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item</title>
-</head>
-<body>
-    <header>
-        <a href="/">Home</a>/
-        <a href="/items">Items</a>/
-        <a href="/about">About</a>
-    </header>
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Item
+{% endblock  %}
+
+{% block style %}
+   {{block.super}}
+   <link rel="stylesheet" href="{% static "css/style.css" %}">
+{% endblock  %}
+
+{% block content %}
+    {{block.super}}
     <br><br>
     <h1>{{item.name}}</h1>
     <div>
@@ -24,11 +26,20 @@
             <b>Товар отсутствует</b>
         {% endif %}
     </div>
-    
+    <div>
+        {% if  colors%}
+            <ul class="no_marks">
+                {% for color in colors %}
+                    <li><div class="div_color" style="background-color: {{color.name}}"></div>&nbsp;&nbsp; {{color.name}}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            Данных по цветам нет
+        {% endif %}
+    </div>
     <div>
         note: <b>{{item.note}}</b>
     </div>
     <br>
-    <b><a href="/items">Назад к списку товаров</a></b>
-</body>
-</html>
+    <b><a href="{% url "items" %}">Назад к списку товаров</a></b>
+{% endblock  %}

@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    
-    <header>
-        <a href="/">Home</a>/
-        <a href="/items">Items</a>/
-        <a href="/about">About</a>
-    </header>
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Homepage
+{% endblock  %}
+
+{% block content %}
+    {{block.super}}
+    <img width=50px src="{%static "images/django.svg"%}" alt="cartoon">
     <br><br>
     <h1>Приветствую!</h1>
     Это главная страница сайта<br>
@@ -21,5 +18,4 @@
     <i>Но Вы можете посетить страницу со списком товаров</i>
     <br><br>
     <b><a href="/items">Доступные товары</a></b>
-</body>
-</html>
+{% endblock  %}

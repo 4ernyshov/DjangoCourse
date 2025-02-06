@@ -70,12 +70,19 @@ def get_item(request, item_id):
     #return HttpResponseNotFound(f"<b>Товар с id={item_id} не найден</b>")
 
     """Модуль 3"""
+    colors = []
     try:
         item = Item.objects.get(pk=item_id)
-        return render(request, "item.html", {"item": item})
+        if item.colors.exists():
+            colors = item.colors.all()
     except ObjectDoesNotExist:  
         return HttpResponseNotFound(f"<b>Товар с id={item_id} не найден</b>")
-
+    else:
+        context = {
+            "item": item,
+            "colors": colors
+        }
+        return render(request, "item.html", context)
     
 def get_items(request):
     """Модуль 1"""
